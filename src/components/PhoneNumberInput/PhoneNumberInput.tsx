@@ -16,7 +16,7 @@ const PhoneNumberInput: React.FC<PhoneInputProps> = ({ value, countryCode, error
   };
 
   return (
-    <div className="field">
+    <div className="input-field">
       <label htmlFor="phone-number-input">Phone Number</label>
       <div className="phone-number-input-wrapper">
         {country && <span className="phone-prefix">{country.countryCodePrefix}</span>}
@@ -35,7 +35,7 @@ const PhoneNumberInput: React.FC<PhoneInputProps> = ({ value, countryCode, error
         />
       </div>
       {error && (
-        <span id="phone-error" className="field-error" role="alert">
+        <span id="phone-error" className="input-field__error" role="alert">
           {error}
         </span>
       )}
