@@ -19,6 +19,7 @@ export function useExchangeRates(): ExchangeRateState {
       .then((data) => {
         if (cancelled) return;
         const rates = {} as Record<CurrencyCode, number>;
+        // Only extract the rates for the supported currencies, in case the API returns more than we need
         for (const currency of SUPPORTED_CURRENCIES) {
           const rate = data.rates[currency];
           if (typeof rate === 'number') {
