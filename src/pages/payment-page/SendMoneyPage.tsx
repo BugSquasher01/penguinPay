@@ -12,6 +12,13 @@ import ReceivedAmount from '../../components/ReceivedAmount/ReceivedAmount';
 import SendButton from '../../components/SendButton/SendButton';
 import AmountToSendInput from '../../components/AmountToSendInput/AmountToSendInput';
 
+/*
+Time constraints notes:
+- App state is kept within this component, with more time I would use a state management library like redux to manage the form state and validation
+- Would create storybook components for all the individual components, to allow for easier development and testing of these components in isolation, and to create a living style guide for the app
+- APP_ID - see getCurrentExchangeRates for notes on API key management, in a real app I would not want to expose the API key in the frontend 
+*/
+
 const INITIAL_VALUES: FormValues = {
   firstName: '',
   lastName: '',
@@ -28,6 +35,7 @@ const SendMoneyForm: React.FC = () => {
 
   const { rates, loading: ratesLoading, error: ratesError } = useExchangeRates();
 
+  // Helper to update form values and re-validate the form on change, but only for fields that have been touched
   const setField = <K extends keyof FormValues>(field: K, value: FormValues[K]) => {
     setValues((prev) => {
       const next = { ...prev, [field]: value };
@@ -39,6 +47,7 @@ const SendMoneyForm: React.FC = () => {
     });
   };
 
+  // Mark a field as touched and validate it on blur
   const handleBlur = (field: keyof FormValues) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
     setErrors(validateForm(values));
@@ -56,7 +65,9 @@ const SendMoneyForm: React.FC = () => {
     return concatReceivedAmount(converted, country.currency);
   }, [values.countryCode, values.amountUsd, rates]);
 
+  // Handle form submission
   const handleSend = () => {
+    // Mark all fields as touched to show validation errors for any untouched fields before submission
     const allTouched: Partial<Record<keyof FormValues, boolean>> = {
       firstName: true,
       lastName: true,
@@ -71,7 +82,7 @@ const SendMoneyForm: React.FC = () => {
     if (Object.keys(validationErrors).length > 0) return;
 
     setStatus('sending');
-    // Simulate sending request; in a real app, this would be an API call
+    // Simulate sending request,  in a real app this would be an API call
     setTimeout(() => setStatus('sent'), 1500);
   };
 
