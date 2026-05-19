@@ -1,7 +1,5 @@
+import SendTransactionScreen from './pages/payment-page/SendMoneyPage'
+
 export default function App() {
-  return (
-    <div>
-      <h1>PenguinPay</h1>
-    </div>
-  )
+  return <SendTransactionScreen />
 }

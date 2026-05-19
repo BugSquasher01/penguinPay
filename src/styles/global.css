@@ -1,0 +1,244 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-primary: #1a56db;
+  --color-primary-hover: #1342b5;
+  --color-success: #057a55;
+  --color-error: #c81e1e;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-border: #d1d5db;
+  --color-border-focus: #1a56db;
+  --color-disabled: #9ca3af;
+  --radius: 6px;
+  --spacing: 16px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing);
+}
+
+/* Screen */
+
+.screen {
+  width: 100%;
+  max-width: 480px;
+}
+
+.screen__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--color-text);
+}
+
+/* Form */
+
+.send-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Field */
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.input-field input,
+.input-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input-field input:focus,
+.input-field select:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.15);
+}
+
+.input-field input[aria-invalid='true'],
+.input-field select[aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.input-field input:disabled,
+.input-field select:disabled {
+  background: var(--color-bg);
+  color: var(--color-disabled);
+  cursor: not-allowed;
+}
+
+.input-field__error,
+.field-error,
+.input-field-error {
+  font-size: 0.8125rem;
+  color: var(--color-error);
+}
+
+/* Phone input */
+
+.phone-input-wrapper,
+.phone-number-input-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.phone-prefix {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-right: none;
+  border-radius: var(--radius) 0 0 var(--radius);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.phone-input-wrapper input,
+.phone-number-input-wrapper input {
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* Amount input */
+
+.amount-input-wrapper,
+.amount-to-send-input-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.currency-symbol {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-right: none;
+  border-radius: var(--radius) 0 0 var(--radius);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+.amount-input-wrapper input,
+.amount-to-send-input-wrapper input {
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* Received amount */
+
+.received-amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.received-amount__label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.received-amount__value {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.received-amount__value--result {
+  color: var(--color-primary);
+}
+
+.received-amount__value--error {
+  color: var(--color-error);
+  font-weight: 400;
+  font-size: 0.8125rem;
+}
+
+/* Send button */
+
+.amount-to-send-button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--color-primary);
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.amount-to-send-button:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.amount-to-send-button:disabled {
+  background: var(--color-disabled);
+  cursor: not-allowed;
+}
+
+.amount-to-send-button--sent {
+  background: var(--color-success);
+}
+
+/* Transaction banner */
+
+.transaction-banner {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+}
+
+.transaction-banner--sending {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.transaction-banner--sent {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}

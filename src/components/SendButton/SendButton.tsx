@@ -9,7 +9,7 @@ const label: Record<string, string> = {
 const SendButton: React.FC<SendButtonProps> = ({ status, disabled, onClick }) => (
   <button
     type="button"
-    className={`send-button send-button--${status}`}
+    className={`amount-to-send-button amount-to-send-button--${status}`}
     disabled={disabled || status !== 'idle'}
     onClick={onClick}
   >
