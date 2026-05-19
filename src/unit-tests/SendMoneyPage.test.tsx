@@ -4,7 +4,7 @@ import SendMoneyForm from '../pages/payment-page/SendMoneyPage';
 import { getCurrentExchangeRates, ExchangeRateError } from '../api/getCurrentExchangeRates';
 
 // vi.mock is hoisted by Vitest so the mock is in place before useExchangeRates binds its import
-vi.mock('../../api/getCurrentExchangeRates', async (importOriginal) => {
+vi.mock('../api/getCurrentExchangeRates', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../api/getCurrentExchangeRates')>();
   return {
     ...actual,
@@ -34,7 +34,7 @@ function mockRatesFailure(message = 'The exchange rate service is temporarily un
 }
 
 function fillForm() {
-  fireEvent.change(screen.getByLabelText('Recipient First Name'), { target: { value: 'Jane' } });
+  fireEvent.change(screen.getByLabelText('Recipient First Name'), { target: { value: 'Bobby' } });
   fireEvent.change(screen.getByLabelText('Recipient Last Name'), { target: { value: 'Smith' } });
   fireEvent.change(screen.getByRole('combobox'), { target: { value: 'KE' } });
   fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '712345678' } });
@@ -97,7 +97,7 @@ describe('SendMoneyPage: send button availability', () => {
     render(<SendMoneyForm />);
     await act(async () => { await Promise.resolve(); });
 
-    fireEvent.change(screen.getByLabelText('Recipient First Name'), { target: { value: 'Jane' } });
+    fireEvent.change(screen.getByLabelText('Recipient First Name'), { target: { value: 'Bobby' } });
     fireEvent.change(screen.getByLabelText('Recipient Last Name'), { target: { value: 'Smith' } });
     fireEvent.change(screen.getByLabelText('Amount to Send (USD)'), { target: { value: '100' } });
     fireEvent.click(screen.getByRole('button', { name: /send/i }));
@@ -110,7 +110,7 @@ describe('SendMoneyPage: send button availability', () => {
     render(<SendMoneyForm />);
     await act(async () => { await Promise.resolve(); });
 
-    fireEvent.change(screen.getByLabelText('Recipient First Name'), { target: { value: 'Jane' } });
+    fireEvent.change(screen.getByLabelText('Recipient First Name'), { target: { value: 'Bobby' } });
     fireEvent.change(screen.getByLabelText('Recipient Last Name'), { target: { value: 'Smith' } });
     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'KE' } });
     fireEvent.change(screen.getByLabelText('Amount to Send (USD)'), { target: { value: '100' } });
@@ -124,7 +124,7 @@ describe('SendMoneyPage: send button availability', () => {
     render(<SendMoneyForm />);
     await act(async () => { await Promise.resolve(); });
 
-    fireEvent.change(screen.getByLabelText('Recipient First Name'), { target: { value: 'Jane' } });
+    fireEvent.change(screen.getByLabelText('Recipient First Name'), { target: { value: 'Bobby' } });
     fireEvent.change(screen.getByLabelText('Recipient Last Name'), { target: { value: 'Smith' } });
     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'KE' } });
     fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '712345678' } });
