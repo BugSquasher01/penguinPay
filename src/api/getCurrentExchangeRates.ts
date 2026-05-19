@@ -8,6 +8,7 @@ const APP_ID = '263f46df20cd4bdfa403bf4fdcb93309';
 const RATES_URL = `https://openexchangerates.org/api/latest.json?app_id=${APP_ID}`;
 
 export class ExchangeRateError extends Error {
+  // Custom error class to represent errors related to fetching exchange rates, so we can distinguish these from other types of errors in our error handling logic
   constructor(message: string) {
     super(message);
     this.name = 'ExchangeRateError';
@@ -70,6 +71,7 @@ export async function getCurrentExchangeRates(): Promise<ExchangeRateResponse> {
 function isValidExchangeRateResponse(data: unknown): data is ExchangeRateResponse {
   if (typeof data !== 'object' || data === null) return false;
   const obj = data as Record<string, unknown>;
+  // We expect the response to have a 'rates' object with string keys and number values, a 'base' string, and a 'timestamp' number
   return (
     typeof obj.rates === 'object' &&
     obj.rates !== null &&
