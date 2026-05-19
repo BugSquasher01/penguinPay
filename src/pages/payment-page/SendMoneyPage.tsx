@@ -16,7 +16,8 @@ import AmountToSendInput from '../../components/AmountToSendInput/AmountToSendIn
 Time constraints notes:
 - App state is kept within this component, with more time I would use a state management library like redux to manage the form state and validation
 - Would create storybook components for all the individual components, to allow for easier development and testing of these components in isolation, and to create a living style guide for the app
-- APP_ID - see getCurrentExchangeRates for notes on API key management, in a real app I would not want to expose the API key in the frontend 
+- APP_ID - see getCurrentExchangeRates for notes on API key management, in a real app I would not want to expose the API key in the frontend
+- Would use design token vars for CSS variables for all colours, spacings, gaps, font sizes etc, to make it easier to apply consistent styling across the app and to allow for easier theming in the future
 */
 
 const INITIAL_VALUES: FormValues = {
