@@ -42,7 +42,7 @@ export function validateForm(values: FormValues): FormErrors {
   if (!values.amountUsd.trim()) {
     errors.amountUsd = 'Amount is required.';
   } else if (!/^\d+$/.test(values.amountUsd.trim())) {
-    errors.amountUsd = 'Amount must be a whole number with no decimals.';
+    errors.amountUsd = 'Amount must be a whole number of dollars (digits only, no decimals).';
   } else if (isNaN(amount) || amount <= 0) {
     errors.amountUsd = 'Amount must be greater than zero.';
   }

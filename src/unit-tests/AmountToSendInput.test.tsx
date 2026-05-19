@@ -9,22 +9,23 @@ const baseProps = {
   disabled: false,
 };
 
-describe('AmountToSendInput input filtering', () => {
-  it('should strip decimal points before calling onChange', () => {
+describe('AmountToSendInput input handling', () => {
+  it('should pass a decimal value through unchanged instead of stripping the point', () => {
     const onChange = vi.fn();
     render(<AmountToSendInput {...baseProps} onChange={onChange} />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: '10.55' } });
-    expect(onChange).toHaveBeenCalledWith('1055');
+    // Must never transform a decimal into a larger whole-dollar value (e.g. "1055").
+    expect(onChange).toHaveBeenCalledWith('10.55');
   });
 
-  it('should strip non-digit characters before calling onChange', () => {
+  it('should pass invalid characters through unchanged so validation can flag them', () => {
     const onChange = vi.fn();
     render(<AmountToSendInput {...baseProps} onChange={onChange} />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: '123aa' } });
-    expect(onChange).toHaveBeenCalledWith('123');
+    expect(onChange).toHaveBeenCalledWith('123aa');
   });
 
-  it('should allow whole numbers through unchanged', () => {
+  it('should pass whole numbers through unchanged', () => {
     const onChange = vi.fn();
     render(<AmountToSendInput {...baseProps} onChange={onChange} />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: '123' } });
@@ -39,5 +40,12 @@ describe('AmountToSendInput input filtering', () => {
   it('should render an error message when error prop is provided', () => {
     render(<AmountToSendInput {...baseProps} error="Amount is required." />);
     expect(screen.getByRole('alert')).toHaveTextContent('Amount is required.');
+  });
+
+  it('should render the correct error message when error prop is provided', () => {
+    render(<AmountToSendInput {...baseProps} error="Amount must be a whole number of dollars (digits only, no decimals)." />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(input).toHaveAttribute('aria-describedby', 'amount-to-send-error');
   });
 });
