@@ -49,6 +49,7 @@ src/
 ├── styles/
 │   └── global.css              # Global styles and CSS variables
 ├── types/                      # Shared TypeScript types
+├── unit-tests/                 # Holds unit tests for components & payment screen
 ├── utils/                      # Form validation and currency conversion
 ├── App.tsx
 └── main.tsx
