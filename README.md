@@ -42,10 +42,10 @@ src/
 │   ├── SendButton/             # Submit button with sending/sent states
 │   └── TransactionBanner/      # Status banner shown after send
 ├── hooks/
-│   └── useExchangeRates.ts     # Fetches and caches live rates
+│   └── useExchangeRates.ts     # Fetches live exchange rates from [Open Exchange Rates](https://openexchangerates.org)
 ├── pages/
 │   └── payment-page/
-│       └── SendMoneyPage.tsx   # Main page — composes all components
+│       └── SendMoneyPage.tsx   # Main transation form
 ├── styles/
 │   └── global.css              # Global styles and CSS variables
 ├── types/                      # Shared TypeScript types
