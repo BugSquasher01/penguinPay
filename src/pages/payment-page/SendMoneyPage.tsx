@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { FormErrors, FormValues, TransactionStatus } from '../../types/inputFormFields';
 import { validateForm } from '../../utils/validateFormFields';
 import { useExchangeRates } from '../../hooks/useExchangeRates';
@@ -71,9 +71,20 @@ const SendMoneyForm: React.FC = () => {
     if (Object.keys(validationErrors).length > 0) return;
 
     setStatus('sending');
-    // Simulate async send; replace with real API call if needed
+    // Simulate sending request; in a real app, this would be an API call
     setTimeout(() => setStatus('sent'), 1500);
   };
+
+  // refresh the form after showing the success message for a few seconds
+  useEffect(() => {
+    if (status === 'sent') {
+      setTimeout(() => {
+    setStatus('idle')
+    setValues(INITIAL_VALUES);
+    setTouched({});
+    }, 3000);
+      }
+  }, [status]);
 
   const recipientName = [values.firstName.trim(), values.lastName.trim()]
     .filter(Boolean)
@@ -83,7 +94,7 @@ const SendMoneyForm: React.FC = () => {
 
   return (
     <main className="screen">
-      <h1 className="screen__title">Send Money</h1>
+      <h1 className="screen__title">PenguinPay - Transaction form</h1>
 
       <TransactionBanner status={status} recipientName={recipientName} />
 
