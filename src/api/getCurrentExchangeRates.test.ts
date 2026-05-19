@@ -30,11 +30,9 @@ describe('fetchExchangeRates', () => {
     await expect(getCurrentExchangeRates()).rejects.toBeInstanceOf(ExchangeRateError);
   });
 
-  it('throws ExchangeRateError with correct status code on 503', async () => {
+  it('throws ExchangeRateError on a 503 response', async () => {
     mockFetch(503, {});
-    const err = await getCurrentExchangeRates().catch((e) => e);
-    expect(err).toBeInstanceOf(ExchangeRateError);
-    expect(err.statusCode).toBe(503);
+    await expect(getCurrentExchangeRates()).rejects.toBeInstanceOf(ExchangeRateError);
   });
 
   it('throws ExchangeRateError on a 401 response', async () => {

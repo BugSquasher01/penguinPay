@@ -1,5 +1,5 @@
-import SendTransactionScreen from './pages/payment-page/SendMoneyPage'
+import SendMoneyForm from './pages/payment-page/SendMoneyPage'
 
 export default function App() {
-  return <SendTransactionScreen />
+  return <SendMoneyForm />
 }

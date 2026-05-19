@@ -20,7 +20,7 @@ const INITIAL_VALUES: FormValues = {
   amountUsd: '',
 };
 
-const SendTransactionScreen: React.FC = () => {
+const SendMoneyForm: React.FC = () => {
   const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormValues, boolean>>>({});
@@ -157,4 +157,4 @@ const SendTransactionScreen: React.FC = () => {
   );
 };
 
-export default SendTransactionScreen;
+export default SendMoneyForm;

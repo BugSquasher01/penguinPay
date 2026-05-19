@@ -8,10 +8,7 @@ const APP_ID = '263f46df20cd4bdfa403bf4fdcb93309';
 const RATES_URL = `https://openexchangerates.org/api/latest.json?app_id=${APP_ID}`;
 
 export class ExchangeRateError extends Error {
-  constructor(
-    message: string,
-    public readonly statusCode?: number
-  ) {
+  constructor(message: string) {
     super(message);
     this.name = 'ExchangeRateError';
   }
